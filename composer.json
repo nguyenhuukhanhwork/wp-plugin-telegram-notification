@@ -1,0 +1,13 @@
+{
+  "name": "khanhecb/telegram-notification",
+  "description": "Telegram notification plugin for WordPress",
+  "type": "wordpress-plugin",
+  "autoload": {
+    "psr-4": {
+      "TelegramNotification\\": "includes/"
+    }
+  },
+  "require": {},
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
