@@ -41,6 +41,7 @@ class Telegram_Admin
     {
         $option_group = self::OPTION_GROUP;
         $options = get_option(Telegram_Settings::OPTION_NAME, []);
+        $notify_enabled = Telegram_Settings::is_notify_enabled();
         include TELEGRAM_NOTIFY_DIR . 'views/admin-page.php';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- *  @var array $options
+ *  @var array $options: `api_token`, `api_secret`, `notify_on`
  *  @var string $option_group
  */
 ?>
@@ -12,6 +12,8 @@
         <?php settings_fields($option_group); ?>
 
         <table class="form-table">
+
+            <!-- API  -->
             <tr>
                 <th scope="row">API Token</th>
                 <td>
@@ -24,6 +26,7 @@
                 </td>
             </tr>
 
+            <!-- Chat ID -->
             <tr>
                 <th scope="row">API Secret</th>
                 <td>
@@ -35,6 +38,32 @@
                     >
                 </td>
             </tr>
+
+            <!-- On/Off Send Notification -->
+            <tr>
+                <th scope="row">Send Telegram Notification</th>
+                <td>
+                    <label>
+                        <input
+                            type="radio"
+                            name="telegram_notify_credentials[notify_on]"
+                            value="1"
+                            <?php checked( $options['notify_on'] ?? '0', '1' ); ?>                        >
+                        Yes
+                    </label>
+                    &nbsp;&nbsp;
+                    <label>
+                        <input
+                            type="radio"
+                            name="telegram_notify_credentials[notify_on]"
+                            value="0"
+                            <?php checked( $options['notify_on'] ?? '0', '0' ); ?>
+                        >
+                        No
+                    </label>
+                </td>
+            </tr>
+
         </table>
 
         <?php submit_button(); ?>
