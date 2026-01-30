@@ -7,9 +7,9 @@
  */
 
 namespace TelegramNotification;
+use TelegramNotification\Core\Telegram_Service;
 use TelegramNotification\Admin\Telegram_Admin;
-use TelegramNotification\Core\Telegram_Api_Client;
-use TelegramNotification\Core\Telegram_Settings;
+use TelegramNotification\Admin\Telegram_Test_Handler;
 
 if ( ! defined('ABSPATH') ) {
     exit;
@@ -25,18 +25,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 // If is admin page is load Class Admin Setting
 add_action('plugins_loaded', function () {
     if ( is_admin() ) {
-        ( new Telegram_Admin() )->register();
+        ( new Telegram_Admin() )-> register();
     }
 });
 
-add_action('init', function() {
-    $telegram_settings = Telegram_Settings::get_credentials();
-    $enable_send = Telegram_Settings::is_notify_enabled();
+// Process Submit Send Message
+Telegram_Test_Handler::register();
 
-    if ( $enable_send ) {
-        $api_token = $telegram_settings['api_token'];
-        $api_id = $telegram_settings['api_secret'];
-        $api_client = new Telegram_Api_Client($api_token, $api_id);
-        $api_client->send_message("Send Notification - demo");
-    }
-});
+// Load FadeCade Funciton
+require_once $plugin_dir . 'includes/functions.php';

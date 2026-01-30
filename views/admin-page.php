@@ -3,11 +3,16 @@
  *  @var array $options: `api_token`, `api_secret`, `notify_on`
  *  @var string $option_group
  */
+
+use TelegramNotification\Core\Telegram_Api_Client;
+use TelegramNotification\Core\Telegram_Settings;
+
 ?>
 
 <div class="wrap">
     <h1>Telegram API Settings</h1>
 
+    <!-- Form Setting -->
     <form method="post" action="options.php">
         <?php settings_fields($option_group); ?>
 
@@ -15,11 +20,12 @@
 
             <!-- API  -->
             <tr>
-                <th scope="row">API Token</th>
+                <th scope="row">Bot Token</th>
                 <td>
                     <input
-                        type="text"
+                        type="password"
                         name="telegram_notify_credentials[api_token]"
+                        id="telegram_notify_credentials[api_token]"
                         value="<?php echo esc_attr($options['api_token'] ?? ''); ?>"
                         class="regular-text"
                     >
@@ -28,10 +34,10 @@
 
             <!-- Chat ID -->
             <tr>
-                <th scope="row">API Secret</th>
+                <th scope="row">Chat ID</th>
                 <td>
                     <input
-                        type="password"
+                        type="text"
                         name="telegram_notify_credentials[api_secret]"
                         value="<?php echo esc_attr($options['api_secret'] ?? ''); ?>"
                         class="regular-text"
@@ -41,7 +47,7 @@
 
             <!-- On/Off Send Notification -->
             <tr>
-                <th scope="row">Send Telegram Notification</th>
+                <th scope="row">Enable Send Notification</th>
                 <td>
                     <label>
                         <input
@@ -67,5 +73,26 @@
         </table>
 
         <?php submit_button(); ?>
+    </form>
+
+    <!-- Form Send Test  -->
+    <hr>
+    <h1>Test Telegram Message</h1>
+
+    <form method="post">
+        <?php wp_nonce_field('telegram_test_action', 'telegram_test_nonce'); ?>
+
+        <p>
+            <textarea
+                name="telegram_notify_send_test_message"
+                rows="4"
+                class="large-text"
+                placeholder="Leave empty to send default test message"
+            ></textarea>
+        </p>
+
+        <p>
+            <?php submit_button('Send Test Message', 'primary', 'telegram_send_test');?>
+        </p>
     </form>
 </div>

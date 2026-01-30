@@ -6,7 +6,7 @@ class Telegram_Settings {
     const OPTION_NAME = 'telegram_notify_credentials';
 
     /**
-     * Get data
+     * Get Bot data
      * @return array
      */
     public static function get_credentials(): array {
@@ -17,6 +17,18 @@ class Telegram_Settings {
         ];
     }
 
+    public static function get_bot_token(): string {
+        return self::get_credentials()['api_token'] ??'';
+    }
+
+    public static function get_default_chat_id(): string {
+        return self::get_credentials()['api_secret'] ?? '';
+    }
+
+    /**
+     * Turn On/ Turn Off send Notification
+     * @return bool
+     */
     public static function is_notify_enabled(): bool {
         $options = get_option(self::OPTION_NAME, []);
         return isset($options['notify_on']) && $options['notify_on'] === '1';
