@@ -8,6 +8,8 @@
 
 namespace TelegramNotification;
 use TelegramNotification\Admin\Telegram_Admin;
+use TelegramNotification\Core\Telegram_Api_Client;
+use TelegramNotification\Core\Telegram_Settings;
 
 if ( ! defined('ABSPATH') ) {
     exit;
@@ -27,3 +29,14 @@ add_action('plugins_loaded', function () {
     }
 });
 
+add_action('init', function() {
+    $telegram_settings = Telegram_Settings::get_credentials();
+    $enable_send = Telegram_Settings::is_notify_enabled();
+
+    if ( $enable_send ) {
+        $api_token = $telegram_settings['api_token'];
+        $api_id = $telegram_settings['api_secret'];
+        $api_client = new Telegram_Api_Client($api_token, $api_id);
+        $api_client->send_message("Send Notification - demo");
+    }
+});
