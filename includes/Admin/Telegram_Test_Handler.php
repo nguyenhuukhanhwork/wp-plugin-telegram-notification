@@ -39,6 +39,6 @@ class Telegram_Test_Handler {
         $api_token = $telegram_settings['api_token'];
         $api_id = $telegram_settings['api_secret'];
         $api_client = new Telegram_Api_Client($api_token, $api_id);
-        $api_client->send_message($message, '2');
+        $api_client->send_message($message);
     }
 }

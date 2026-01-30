@@ -1,19 +1,29 @@
 <?php
 /**
- * Plugin Name: ECB Mock Checkout (Dev Tool)
- * Description: Create WooCommerce orders from mock payload via WP-CLI (for dev/testing)
+ * Telegram Notification
+ * 
+ * @wordpress-plugin
+ * @author  KhanhECB
+ * 
+ * Plugin Name: Telegram Notification
+ * Description: Send message to Telegram chat group, notification for company.
+ * Plugin URI: https://github.com/nguyenhuukhanhwork/wp-plugin-telegram-notification
  * Version: 1.0.0
  * Author: KhanhECB
+ * Author URL: https://www.linkedin.com/in/khanh-nguyen-huu-1aa09733a/
+ * Requires PHP: 8.1
  */
 
 namespace TelegramNotification;
-use TelegramNotification\Core\Telegram_Service;
+
 use TelegramNotification\Admin\Telegram_Admin;
 use TelegramNotification\Admin\Telegram_Test_Handler;
 
 if ( ! defined('ABSPATH') ) {
     exit;
 }
+
+define('TELEGRAM_NOTIFY_VERSION', '1.0.0');
 
 $plugin_dir = plugin_dir_path(__FILE__);
 $plugin_url = plugin_dir_url(__FILE__);
@@ -32,5 +42,5 @@ add_action('plugins_loaded', function () {
 // Process Submit Send Message
 Telegram_Test_Handler::register();
 
-// Load FadeCade Funciton
+// Load Facade Funciton
 require_once $plugin_dir . 'includes/functions.php';
