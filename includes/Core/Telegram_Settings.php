@@ -12,17 +12,17 @@ class Telegram_Settings {
     public static function get_credentials(): array {
         $options = get_option( self::OPTION_NAME, [] );
         return [
-            'api_token' => $options['api_token'] ?? '',
-            'api_secret' => $options['api_secret'] ?? ''
+            'bot_token' => $options['bot_token'] ?? '',
+            'chat_id' => $options['chat_id'] ?? ''
         ];
     }
 
     public static function get_bot_token(): string {
-        return self::get_credentials()['api_token'] ??'';
+        return self::get_credentials()['bot_token'] ??'';
     }
 
     public static function get_default_chat_id(): string {
-        return self::get_credentials()['api_secret'] ?? '';
+        return self::get_credentials()['chat_id'] ?? '';
     }
 
     /**
@@ -40,6 +40,6 @@ class Telegram_Settings {
      */
     public static function has_valid_credentials(): bool {
         $c = self::get_credentials();
-        return ! empty($c['api_token']) && ! empty($c['api_secret']);
+        return ! empty($c['bot_token']) && ! empty($c['chat_id']);
     }
 }

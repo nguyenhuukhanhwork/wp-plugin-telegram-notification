@@ -3,8 +3,8 @@
 namespace TelegramNotification\Core;
 
 class Telegram_Api_Client {
-    protected readonly string $bot_token;
-    protected readonly string $chat_id;
+    protected string $bot_token;
+    protected string $chat_id;
     
     public function __construct(string $bot_token, string $chat_id) {
         $this->bot_token = $bot_token;

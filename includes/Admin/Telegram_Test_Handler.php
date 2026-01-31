@@ -35,10 +35,27 @@ class Telegram_Test_Handler {
         }
 
         $telegram_settings = Telegram_Settings::get_credentials();
-        
-        $api_token = $telegram_settings['api_token'];
-        $api_id = $telegram_settings['api_secret'];
-        $api_client = new Telegram_Api_Client($api_token, $api_id);
+
+        // Get Bot Token and Fallback if error
+        $bot_token = $telegram_settings['bot_token'] ?? '';
+        $chat_id = $telegram_settings['chat_id'] ?? '';
+
+        // Check Empty Bot Token or Chat ID
+        if (!$bot_token || !$chat_id) {
+            add_action('admin_notices', function () {
+
+                if (!current_user_can('manage_options')) {
+                    return;
+                }
+                $message = 'Missing Bot Token or Chat ID';
+                echo "<div class='notice notice-error is-dismissible'><p> $message </p></div>";
+            });
+
+            return;
+        }
+
+        // Send
+        $api_client = new Telegram_Api_Client($bot_token, $chat_id);
         $api_client->send_message($message);
     }
 }

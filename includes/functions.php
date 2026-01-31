@@ -13,7 +13,7 @@ use TelegramNotification\Core\Telegram_Service;
  * @param string $chat_id
  * @return bool
  */
-function telegram_send( string $message, string $chat_id = '') {
+function telegram_send( string $message, string $chat_id = ''): bool {
 
     // Check Chat Id is string
     if ( ! is_string( $chat_id ) ) {

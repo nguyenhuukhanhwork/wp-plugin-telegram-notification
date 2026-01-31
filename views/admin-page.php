@@ -1,6 +1,6 @@
 <?php
 /**
- *  @var array $options: `api_token`, `api_secret`, `notify_on`
+ *  @var array $options: `bot_token`, `chat_id`, `notify_on`
  *  @var string $option_group
  */
 
@@ -24,9 +24,8 @@ use TelegramNotification\Core\Telegram_Settings;
                 <td>
                     <input
                         type="password"
-                        name="telegram_notify_credentials[api_token]"
-                        id="telegram_notify_credentials[api_token]"
-                        value="<?php echo esc_attr($options['api_token'] ?? ''); ?>"
+                        name="telegram_notify_credentials[bot_token]"
+                        value="<?php echo esc_attr($options['bot_token'] ?? ''); ?>"
                         class="regular-text"
                     >
                 </td>
@@ -38,8 +37,8 @@ use TelegramNotification\Core\Telegram_Settings;
                 <td>
                     <input
                         type="text"
-                        name="telegram_notify_credentials[api_secret]"
-                        value="<?php echo esc_attr($options['api_secret'] ?? ''); ?>"
+                        name="telegram_notify_credentials[chat_id]"
+                        value="<?php echo esc_attr($options['chat_id'] ?? ''); ?>"
                         class="regular-text"
                     >
                 </td>
